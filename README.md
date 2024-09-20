@@ -8,6 +8,7 @@
 ## Technologies Used
 - **SwiftUI**: For the user interface and interaction.
 - **SwiftData**: Used for storing and retrieving passcodes.
+- **CryptoKit**: For encrypting the data stored.
 ## Setup Instructions
     1. Clone or download the project.
     2. Open the project in Xcode.
@@ -17,7 +18,7 @@
 
 ## ⚠️ Warning
 - This app is for demonstration purposes and may not be suitable for production use.
-- **At the moment, encryption of data is not done in SwiftData. You are solely responsible for using this app on a Jailbroken device.**
+- **At the moment, the app uses AES-GCM implementation for encrypting and storing data.**
 
 
 ## Future Improvements
