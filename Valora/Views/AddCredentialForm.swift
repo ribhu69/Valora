@@ -60,22 +60,30 @@ struct AddCredentialForm: View {
     }
     
     func saveCredentials() {
-        let credential = Credential(
-            uuid: UUID(),
-            webURL: url.isEmpty ? nil : url,
-            userId: userId,
-            password: password,
-            desc: desc
-        )
-        onSave(credential)
-        dismiss()
-    }
-}
-
-struct AddCredentialForm_Previews: PreviewProvider {
-    static var previews: some View {
-        AddCredentialForm {_ in 
-            
+        
+        do {
+            let encryptedUserId = try AppSecurity.shared.encrypt(plainText: userId)
+            let encryptedPassWord = try AppSecurity.shared.encrypt(plainText: password)
+            let credential = Credential(
+                uuid: UUID(),
+                webURL: url.isEmpty ? nil : url,
+                userId: encryptedUserId,
+                password: encryptedPassWord,
+                desc: desc
+            )
+            onSave(credential)
+            dismiss()
+        }
+        catch {
+            fatalError()
         }
     }
 }
+
+//struct AddCredentialForm_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddCredentialForm {_ in 
+//            
+//        }
+//    }
+//}

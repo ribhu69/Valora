@@ -12,18 +12,24 @@ import SwiftUI
 
 struct PassCodeDetailView: View {
     
-    @State private var id: String = ""
-    @State private var password: String = ""
+    private var id: Data
+    private var password: Data
     @State private var showPassword: Bool = false
     @State private var url: String = ""
     @State private var description: String = ""
+    
+    @State var decryptedId : String = ""
+    @State var decryptedPassword : String = ""
 
     
     init(passCode: Credential) {
-        _id = State(wrappedValue: passCode.userId)
-        _password = State(wrappedValue: passCode.password)
+        id = passCode.userId
+        password = passCode.password
         _url = State(wrappedValue: passCode.webURL ?? "")
         _description = State(wrappedValue: passCode.desc)
+        
+        _decryptedId = try! State(wrappedValue: AppSecurity.shared.decrypt(encryptedData: passCode.userId))
+        _decryptedPassword = try! State(wrappedValue: AppSecurity.shared.decrypt(encryptedData: passCode.password))
     }
    
     var body: some View {
@@ -34,7 +40,7 @@ struct PassCodeDetailView: View {
                 Text("User ID")
                     .font(.title3)
                     .foregroundStyle(.secondary)
-                TextField("ID", text: $id)
+                TextField("ID", text: $decryptedId)
                     .font(.title2)
                     .padding(.bottom, 8)
 
@@ -44,10 +50,10 @@ struct PassCodeDetailView: View {
                     .padding(.top, 8)
                 HStack {
                     if showPassword {
-                        TextField("Password", text: $password)
+                        TextField("Password", text: $decryptedPassword)
                             .font(.title2)
                     } else {
-                        SecureField("Password", text: $password)
+                        SecureField("Password", text: $decryptedPassword)
                             .font(.title2)
                     }
                     Button(action: {

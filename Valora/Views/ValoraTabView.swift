@@ -9,21 +9,41 @@ import Foundation
 import SwiftUI
 
 struct ValoraTabView : View {
+    @State private var animateList = false
+    @State private var animateGear = false
     var body: some View {
+        
         NavigationStack {
             TabView {
                 PasscodeListView()
+                
                     .tabItem {
-                        Image(systemName: "list.clipboard")
-                            .renderingMode(.template)
+                        
+                        Button(action: {
+                            animateList.toggle()
+                        }, label: {
+                            Image(systemName: "list.clipboard")
+                                .renderingMode(.template)
+                                .symbolEffect(.pulse, value: animateList)
+                        })
+                         
                     }
                 SettingsView()
                     .tabItem {
-                        Image(systemName: "gear")
-
-                            .renderingMode(.template)
+                        
+                        Button(action: {
+                            animateGear.toggle()
+                            
+                        }, label: {
+                            Image(systemName: "gear")
+                                .renderingMode(.template)
+                                .symbolEffect(.pulse, value: animateGear)
+                        })
+                        
                     }
             }
         }
     }
+    
+    
 }

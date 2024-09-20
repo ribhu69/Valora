@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import SwiftData
+import Security
+import CryptoKit
 
 struct PassCodeCellView : View {
     var credential : Credential
@@ -47,9 +49,13 @@ struct PasscodeListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var passCodes: [Credential] = []
 
+    @State private var setupMasterKeyForm = false
     @State private var showAddCredentialForm = false
     @State private var itemToDelete: Credential?
     @State private var showDeletePrompt = false
+    
+    
+    @State var masterKey : String? = nil
     
     init() {
         let appearance = UINavigationBarAppearance()
@@ -63,6 +69,7 @@ struct PasscodeListView: View {
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
     }
     var body: some View {
         NavigationView {
@@ -132,6 +139,22 @@ struct PasscodeListView: View {
             }
             .navigationTitle("Valora")
         }
+        .onAppear {
+            if masterKey == nil {
+                masterKey = AppSecurity.shared.retrieveValueFromKeychain(forKey: APP_MASTER_KEY)
+                if masterKey == nil {
+                    setupMasterKeyForm.toggle()
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $setupMasterKeyForm, content: {
+            SetupMasterKeyForm {
+                masterKey in
+                
+                _ = AppSecurity.shared.storeValueInKeychain(value: masterKey, forKey: APP_MASTER_KEY)
+                
+            }
+        })
     }
     
     private func addCredential(credential : Credential) {
@@ -147,6 +170,10 @@ struct PasscodeListView: View {
     func invokeDeleteAction(for item: Credential) {
         removeCredential(credential: item)
     }
+    
+    
+    
+    
 }
 
 //#Preview {
