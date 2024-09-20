@@ -15,6 +15,17 @@
 		A25392D12C9D8C9F00DE9F7D /* ValoraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392D02C9D8C9F00DE9F7D /* ValoraTests.swift */; };
 		A25392DB2C9D8C9F00DE9F7D /* ValoraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392DA2C9D8C9F00DE9F7D /* ValoraUITests.swift */; };
 		A25392DD2C9D8C9F00DE9F7D /* ValoraUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392DC2C9D8C9F00DE9F7D /* ValoraUITestsLaunchTests.swift */; };
+		A25392EA2C9D8CC200DE9F7D /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392E92C9D8CC200DE9F7D /* Credential.swift */; };
+		A25392EC2C9D8D2B00DE9F7D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392EB2C9D8D2B00DE9F7D /* SettingsView.swift */; };
+		A25392EE2C9D8D5100DE9F7D /* PasscodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392ED2C9D8D5100DE9F7D /* PasscodeListView.swift */; };
+		A25392F02C9D933900DE9F7D /* AddCredentialForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392EF2C9D933900DE9F7D /* AddCredentialForm.swift */; };
+		A25392F22C9D9D7B00DE9F7D /* PassCodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392F12C9D9D7B00DE9F7D /* PassCodeDetailView.swift */; };
+		A25392F62C9DA46100DE9F7D /* ValoraTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25392F52C9DA46100DE9F7D /* ValoraTabView.swift */; };
+		A25392FF2C9DA75500DE9F7D /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A25392F92C9DA69100DE9F7D /* Manrope-Regular.ttf */; };
+		A25393002C9DA75800DE9F7D /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A25392FD2C9DA69100DE9F7D /* Manrope-Bold.ttf */; };
+		A25393012C9DA75A00DE9F7D /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A25392FA2C9DA69100DE9F7D /* Manrope-Light.ttf */; };
+		A25393022C9DA75C00DE9F7D /* Manrope-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A25392FC2C9DA69100DE9F7D /* Manrope-Medium.ttf */; };
+		A25393032C9DA76100DE9F7D /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A25392FB2C9DA69100DE9F7D /* Manrope-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +57,18 @@
 		A25392D62C9D8C9F00DE9F7D /* ValoraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValoraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A25392DA2C9D8C9F00DE9F7D /* ValoraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValoraUITests.swift; sourceTree = "<group>"; };
 		A25392DC2C9D8C9F00DE9F7D /* ValoraUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValoraUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A25392E92C9D8CC200DE9F7D /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
+		A25392EB2C9D8D2B00DE9F7D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A25392ED2C9D8D5100DE9F7D /* PasscodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeListView.swift; sourceTree = "<group>"; };
+		A25392EF2C9D933900DE9F7D /* AddCredentialForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialForm.swift; sourceTree = "<group>"; };
+		A25392F12C9D9D7B00DE9F7D /* PassCodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassCodeDetailView.swift; sourceTree = "<group>"; };
+		A25392F52C9DA46100DE9F7D /* ValoraTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValoraTabView.swift; sourceTree = "<group>"; };
+		A25392F92C9DA69100DE9F7D /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
+		A25392FA2C9DA69100DE9F7D /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
+		A25392FB2C9DA69100DE9F7D /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
+		A25392FC2C9DA69100DE9F7D /* Manrope-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Medium.ttf"; sourceTree = "<group>"; };
+		A25392FD2C9DA69100DE9F7D /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
+		A25392FE2C9DA6F200DE9F7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +119,12 @@
 		A25392BC2C9D8C9D00DE9F7D /* Valora */ = {
 			isa = PBXGroup;
 			children = (
+				A25392FE2C9DA6F200DE9F7D /* Info.plist */,
+				A25392F82C9DA68500DE9F7D /* Fonts */,
+				A25392F72C9DA51100DE9F7D /* DiscardedCode */,
+				A25392F42C9DA3FD00DE9F7D /* Views */,
+				A25392F32C9DA3F200DE9F7D /* Model */,
 				A25392BD2C9D8C9D00DE9F7D /* ValoraApp.swift */,
-				A25392BF2C9D8C9D00DE9F7D /* ContentView.swift */,
-				A25392C12C9D8C9D00DE9F7D /* Item.swift */,
 				A25392C32C9D8C9F00DE9F7D /* Assets.xcassets */,
 				A25392C52C9D8C9F00DE9F7D /* Preview Content */,
 			);
@@ -128,6 +154,47 @@
 				A25392DC2C9D8C9F00DE9F7D /* ValoraUITestsLaunchTests.swift */,
 			);
 			path = ValoraUITests;
+			sourceTree = "<group>";
+		};
+		A25392F32C9DA3F200DE9F7D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A25392E92C9D8CC200DE9F7D /* Credential.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A25392F42C9DA3FD00DE9F7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A25392EB2C9D8D2B00DE9F7D /* SettingsView.swift */,
+				A25392EF2C9D933900DE9F7D /* AddCredentialForm.swift */,
+				A25392ED2C9D8D5100DE9F7D /* PasscodeListView.swift */,
+				A25392F12C9D9D7B00DE9F7D /* PassCodeDetailView.swift */,
+				A25392F52C9DA46100DE9F7D /* ValoraTabView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A25392F72C9DA51100DE9F7D /* DiscardedCode */ = {
+			isa = PBXGroup;
+			children = (
+				A25392BF2C9D8C9D00DE9F7D /* ContentView.swift */,
+				A25392C12C9D8C9D00DE9F7D /* Item.swift */,
+			);
+			path = DiscardedCode;
+			sourceTree = "<group>";
+		};
+		A25392F82C9DA68500DE9F7D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A25392FD2C9DA69100DE9F7D /* Manrope-Bold.ttf */,
+				A25392FA2C9DA69100DE9F7D /* Manrope-Light.ttf */,
+				A25392FC2C9DA69100DE9F7D /* Manrope-Medium.ttf */,
+				A25392F92C9DA69100DE9F7D /* Manrope-Regular.ttf */,
+				A25392FB2C9DA69100DE9F7D /* Manrope-SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,8 +301,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A25393022C9DA75C00DE9F7D /* Manrope-Medium.ttf in Resources */,
+				A25393002C9DA75800DE9F7D /* Manrope-Bold.ttf in Resources */,
 				A25392C72C9D8C9F00DE9F7D /* Preview Assets.xcassets in Resources */,
 				A25392C42C9D8C9F00DE9F7D /* Assets.xcassets in Resources */,
+				A25392FF2C9DA75500DE9F7D /* Manrope-Regular.ttf in Resources */,
+				A25393012C9DA75A00DE9F7D /* Manrope-Light.ttf in Resources */,
+				A25393032C9DA76100DE9F7D /* Manrope-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +333,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A25392C02C9D8C9D00DE9F7D /* ContentView.swift in Sources */,
+				A25392EC2C9D8D2B00DE9F7D /* SettingsView.swift in Sources */,
+				A25392F02C9D933900DE9F7D /* AddCredentialForm.swift in Sources */,
+				A25392F22C9D9D7B00DE9F7D /* PassCodeDetailView.swift in Sources */,
+				A25392EE2C9D8D5100DE9F7D /* PasscodeListView.swift in Sources */,
+				A25392F62C9DA46100DE9F7D /* ValoraTabView.swift in Sources */,
 				A25392C22C9D8C9D00DE9F7D /* Item.swift in Sources */,
+				A25392EA2C9D8CC200DE9F7D /* Credential.swift in Sources */,
 				A25392BE2C9D8C9D00DE9F7D /* ValoraApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,6 +507,7 @@
 				DEVELOPMENT_TEAM = 4G9L8BJP6U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Valora/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -458,6 +537,7 @@
 				DEVELOPMENT_TEAM = 4G9L8BJP6U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Valora/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

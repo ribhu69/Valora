@@ -51,6 +51,19 @@ struct PasscodeListView: View {
     @State private var itemToDelete: Credential?
     @State private var showDeletePrompt = false
     
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [
+            .font: UIFont(name: "Manrope-Regular", size: UIFont.labelFontSize)!
+        ]
+        appearance.largeTitleTextAttributes = [
+            .font: UIFont(name: "Manrope-Regular", size: 34)!
+        ]
+        appearance.backgroundColor = UIColor.systemBackground
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
     var body: some View {
         NavigationView {
             VStack {
@@ -71,6 +84,8 @@ struct PasscodeListView: View {
                                 PassCodeCellView(credential: item)
                                     .padding(.vertical, 8)
                                     .padding(.horizontal, 8)
+                                   
+
                                     .swipeActions {
                                         Button(role: .destructive) {
                                             itemToDelete = item
@@ -82,10 +97,11 @@ struct PasscodeListView: View {
                                         .tint(Color.red)
                                     }
                             }
+                            .listRowSeparator(.hidden)
                         }
                     }
-                    .listRowSeparator(.hidden)
                     .listStyle(.plain)
+                    
                 }
             }
             .alert("Delete Passcode", isPresented: $showDeletePrompt) {
@@ -133,7 +149,7 @@ struct PasscodeListView: View {
     }
 }
 
-#Preview {
-    PasscodeListView().modelContainer(for: Credential.self, inMemory: true)
-}
-
+//#Preview {
+//    PasscodeListView().modelContainer(for: Credential.self, inMemory: true)
+//}
+//

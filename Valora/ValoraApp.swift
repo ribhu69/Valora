@@ -12,7 +12,7 @@ import SwiftData
 struct ValoraApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Credential.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,7 +25,7 @@ struct ValoraApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ValoraTabView()
         }
         .modelContainer(sharedModelContainer)
     }
