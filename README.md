@@ -7,8 +7,7 @@
 
 ## Technologies Used
 - **SwiftUI**: For the user interface and interaction.
-- **SwiftData**: Used for storing, retrieving, and managing passcode data securely.
-
+- **SwiftData**: Used for storing and retrieving passcodes.
 ## Setup Instructions
     1. Clone or download the project.
     2. Open the project in Xcode.
