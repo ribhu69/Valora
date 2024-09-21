@@ -11,38 +11,68 @@ import SwiftData
 import Security
 import CryptoKit
 
-struct PassCodeCellView : View {
-    var credential : Credential
+struct PassCodeCellView: View {
+    var credential: Credential
+    
     var body: some View {
         HStack {
-            if credential.webURL != nil {
-                Image(systemName: "globe")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundStyle(.secondary)
-                    .frame(width: 18, height: 18)
-                    .padding(.leading, 8)
-            }
-            else {
-                Image(systemName: "doc.text")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundStyle(.secondary)
-                    .frame(width: 18, height: 18)
-                    .padding(.leading, 8)
-            }
-         
+            Image(getImage(for: credential.webURL))
+                .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(.secondary)
+                .frame(width: 24, height: 24)
+                .padding(.leading, 8)
+        
             Text(credential.webURL ?? credential.desc)
                 .font(.title3)
                 .padding(.leading, 8)
                 .padding(.trailing, 8)
             Spacer()
-        }
-        .padding(.vertical, 8)
-       
-        
+        }.padding(.vertical, 8)
     }
+    
+    func getImage(for url: String?) -> String {
+        guard let urlString = url, let domain = getDomain(from: urlString) else {
+            return "globe" // Fallback image when there's no URL
+        }
+        
+        let domainImageName = domain.lowercased()
+        
+        // Check if the image exists in the assets
+        if let _ = UIImage(named: domainImageName) {
+            return domainImageName
+        } else {
+            return "globe" // Fallback image if the domain image is not found
+        }
+    }
+    
+    func getDomain(from url: String) -> String? {
+        var domain = url.lowercased() // Make sure it's lowercase for uniformity
+
+        // Remove "https://" or "http://"
+        if domain.hasPrefix("https://") {
+            domain = String(domain.dropFirst(8))
+        } else if domain.hasPrefix("http://") {
+            domain = String(domain.dropFirst(7))
+        }
+
+        // Remove "www." if present
+        if domain.hasPrefix("www.") {
+            domain = String(domain.dropFirst(4))
+        }
+
+        // Remove top-level domain (e.g., .com, .net, .org)
+        if let range = domain.range(of: "\\.[a-z]{2,3}(\\.[a-z]{2,3})?$", options: .regularExpression) {
+            domain.removeSubrange(range)
+        }
+
+        print("Processed Domain: \(domain)")
+        return domain.isEmpty ? nil : domain
+    }
+
 }
+
+
 
 struct PasscodeListView: View {
     
@@ -90,9 +120,7 @@ struct PasscodeListView: View {
                             
                             NavigationLink(destination: PassCodeDetailView(passCode: item)) {
                                 PassCodeCellView(credential: item)
-                                    .padding(.vertical, 8)
-                                    .padding(.horizontal, 8)
-                                   
+                                    
 
                                     .swipeActions {
                                         Button(role: .destructive) {
@@ -106,6 +134,7 @@ struct PasscodeListView: View {
                                     }
                             }
                             .listRowSeparator(.hidden)
+                            
                         }
                     }
                     .listStyle(.plain)
