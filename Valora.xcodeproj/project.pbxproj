@@ -108,6 +108,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A23920FB2C9F4D3A00371329 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				A25393042C9DF59200DE9F7D /* SecurityConstant.swift */,
+				A25393082C9E002600DE9F7D /* AppSecurity.swift */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
+		A23920FC2C9F4D4A00371329 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				A253930A2C9E771800DE9F7D /* DatabaseManager.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		A25392B12C9D8C9D00DE9F7D = {
 			isa = PBXGroup;
 			children = (
@@ -132,18 +149,17 @@
 			isa = PBXGroup;
 			children = (
 				A25393102C9E9FF400DE9F7D /* ValoraPublic.png */,
+				A23920FC2C9F4D4A00371329 /* Database */,
+				A23920FB2C9F4D3A00371329 /* Security */,
 				A25392FE2C9DA6F200DE9F7D /* Info.plist */,
 				A25392F82C9DA68500DE9F7D /* Fonts */,
 				A25392F72C9DA51100DE9F7D /* DiscardedCode */,
 				A25392F42C9DA3FD00DE9F7D /* Views */,
 				A25392F32C9DA3F200DE9F7D /* Model */,
 				A25392BD2C9D8C9D00DE9F7D /* ValoraApp.swift */,
+				A253930C2C9E77B100DE9F7D /* AppStart.swift */,
 				A25392C32C9D8C9F00DE9F7D /* Assets.xcassets */,
 				A25392C52C9D8C9F00DE9F7D /* Preview Content */,
-				A25393042C9DF59200DE9F7D /* SecurityConstant.swift */,
-				A25393082C9E002600DE9F7D /* AppSecurity.swift */,
-				A253930A2C9E771800DE9F7D /* DatabaseManager.swift */,
-				A253930C2C9E77B100DE9F7D /* AppStart.swift */,
 			);
 			path = Valora;
 			sourceTree = "<group>";
@@ -534,7 +550,6 @@
 				INFOPLIST_FILE = Valora/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -564,7 +579,6 @@
 				INFOPLIST_FILE = Valora/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
