@@ -8,15 +8,16 @@
 import Foundation
 import SwiftUI
 
+
 struct SettingsView : View {
     
-    @Environment(\.modelContext) var modelContext
+    
+    @State private var updateMasterKey = false
     private var appVersion: String {
         let infoDictionary = Bundle.main.infoDictionary
         let version = infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
         return version
     }
-    
     
     init() {
         let appearance = UINavigationBarAppearance()
@@ -45,6 +46,21 @@ struct SettingsView : View {
                         .font(.title3)
                         .foregroundStyle(.primary)
                     
+                    VStack(alignment: .leading) {
+                        Text("Update Master Key")
+                            .font(.title2)
+                            .foregroundStyle(.primary)
+                            .padding(.bottom, 8)
+                        Text("Lets you change your app's master key.")
+                            .font(.title3)
+                            .foregroundStyle(.secondary)
+                            .padding(.bottom, 8)
+                    }
+                    .padding(.top, 8)
+                    .onTapGesture {
+                        updateMasterKey.toggle()
+                    }
+                    
                     Link(destination: URL(string: "https://github.com/ribhu69/Valora")!) {
                         Text("@Valora")
                             .font(.title3)
@@ -56,10 +72,18 @@ struct SettingsView : View {
             .padding()
             .navigationTitle("Settings")
         }
+        .sheet(isPresented: $updateMasterKey, content: {
+            SetupMasterKeyForm(isEditMode: true) {
+                isEditMode,masterKey  in
+                if isEditMode {
+                    _ = AppSecurity.shared.updateValueInKeychain(value: masterKey)
+                }
+            }
+        })
     }
 }
 
-#Preview {
-    SettingsView()
-}
-
+//#Preview {
+//    SettingsView()
+//}
+//

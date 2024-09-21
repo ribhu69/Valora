@@ -8,3 +8,5 @@
 import Foundation
 
 let APP_MASTER_KEY = "AppMasterKey"
+let APP_MASTER_KEY_SET = "AppMasterKeySet"
+let MASTER_KEY_UPDATED = "MasterKeyUpdated"

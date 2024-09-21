@@ -46,8 +46,8 @@ struct PassCodeCellView : View {
 
 struct PasscodeListView: View {
     
-    @Environment(\.modelContext) private var modelContext
-    @Query private var passCodes: [Credential] = []
+    
+    @State var passCodes: [Credential] = []
 
     @State private var setupMasterKeyForm = false
     @State private var showAddCredentialForm = false
@@ -69,6 +69,8 @@ struct PasscodeListView: View {
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
+        fetchCredentials()
         
     }
     var body: some View {
@@ -137,42 +139,61 @@ struct PasscodeListView: View {
                     addCredential(credential: cred)
                 }
             }
+            .onReceive(NotificationCenter.default
+                .publisher(for: NSNotification.Name(MASTER_KEY_UPDATED)), perform: { _ in
+                    fetchCredentials()
+            })
             .navigationTitle("Valora")
         }
+        
         .onAppear {
+            
             if masterKey == nil {
-                masterKey = AppSecurity.shared.retrieveValueFromKeychain(forKey: APP_MASTER_KEY)
-                if masterKey == nil {
+                let val = UserDefaults.standard.value(forKey: APP_MASTER_KEY_SET) as? Bool
+                if val != nil {
+                    masterKey = AppSecurity.shared.retrieveValueFromKeychain(forKey: APP_MASTER_KEY)
+                }
+                else {
+                    // to handle the case if any previous value was already saved to keychain
+                   _ = AppSecurity.shared.deleteValueFromKeychain()
                     setupMasterKeyForm.toggle()
                 }
             }
         }
         .fullScreenCover(isPresented: $setupMasterKeyForm, content: {
             SetupMasterKeyForm {
-                masterKey in
-                
+                isEditMode,masterKey  in
                 _ = AppSecurity.shared.storeValueInKeychain(value: masterKey, forKey: APP_MASTER_KEY)
-                
+                UserDefaults.standard.setValue(true, forKey: APP_MASTER_KEY_SET)
             }
         })
     }
     
-    private func addCredential(credential : Credential) {
-        withAnimation {
-            modelContext.insert(credential)
+    private func fetchCredentials() {
+        let fetchDesc = FetchDescriptor<Credential>()
+        do {
+            let context = DatabaseManager.shared.getModelContext()
+            let updatedItems = try context.fetch(fetchDesc)
+            passCodes = updatedItems
+        }
+        catch {
+            fatalError()
         }
     }
     
-    private func removeCredential(credential: Credential) {
-        modelContext.delete(credential)
+    private func addCredential(credential : Credential) {
+        withAnimation {
+            let context = DatabaseManager.shared.getModelContext()
+            context.insert(credential)
+            passCodes.append(credential)
+        }
     }
-
+    
     func invokeDeleteAction(for item: Credential) {
-        removeCredential(credential: item)
+        let context = DatabaseManager.shared.getModelContext()
+        context.delete(item)
+        passCodes.removeAll { $0.uuid.uuidString == item.uuid.uuidString}
     }
-    
-    
-    
     
 }
 

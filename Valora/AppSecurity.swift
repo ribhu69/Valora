@@ -22,8 +22,8 @@ class AppSecurity {
     }
 
     // Encrypt function using AES-GCM
-    func encrypt(plainText: String) throws -> Data {
-        let passWord = retrieveValueFromKeychain(forKey: APP_MASTER_KEY)!
+    func encrypt(plainText: String, withKey key: String? = nil) throws -> Data {
+        let passWord = key ?? retrieveValueFromKeychain(forKey: APP_MASTER_KEY)!
         let key = generateSymmetricKey(from: passWord)
         let data = Data(plainText.utf8)
         
@@ -86,4 +86,51 @@ class AppSecurity {
             return false
         }
     }
+    
+    func updateValueInKeychain(value: String) -> Bool {
+        let valueData = value.data(using: .utf8)!
+        
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: APP_MASTER_KEY
+        ]
+        
+        let attributesToUpdate: [String: Any] = [
+            kSecValueData as String: valueData
+        ]
+        
+        // Update the item.
+        let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
+        
+        if status == errSecSuccess {
+            print("Value updated successfully!")
+            return true
+        } else {
+            print("Error updating value: \(status)")
+            return false
+        }
+    }
+    
+    func deleteValueFromKeychain() -> Bool {
+        // Define the query to find the item
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: APP_MASTER_KEY
+        ]
+        
+        // Delete the item
+        let status = SecItemDelete(query as CFDictionary)
+        
+        if status == errSecSuccess {
+            print("Value deleted successfully!")
+            return true
+        } else if status == errSecItemNotFound {
+            print("No value found for deletion.")
+            return false
+        } else {
+            print("Error deleting value: \(status)")
+            return false
+        }
+    }
+
 }
