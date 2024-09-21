@@ -58,7 +58,6 @@ struct SetupMasterKeyForm: View {
         
         if isEditMode {
             existingPassword = AppSecurity.shared.retrieveValueFromKeychain(forKey: APP_MASTER_KEY)!
-            print("ZXCV: \(existingPassword)")
         }
     }
     
@@ -160,13 +159,15 @@ struct SetupMasterKeyForm: View {
             }
             .navigationTitle(!isEditMode ? "Setup Master Key" : "Update Master Key")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text("Cancel")
-                    }
+                if isEditMode {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Cancel")
+                        }
 
+                    }
                 }
             }
         }

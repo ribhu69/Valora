@@ -70,7 +70,6 @@ struct PasscodeListView: View {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
-        fetchCredentials()
         
     }
     var body: some View {
@@ -148,6 +147,7 @@ struct PasscodeListView: View {
         
         .onAppear {
             
+            fetchCredentials()
             if masterKey == nil {
                 let val = UserDefaults.standard.value(forKey: APP_MASTER_KEY_SET) as? Bool
                 if val != nil {

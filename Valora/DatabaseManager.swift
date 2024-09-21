@@ -11,23 +11,49 @@ import SwiftData
 class DatabaseManager {
     
     static let shared = DatabaseManager()
-    var context : ModelContext
-    var sharedContainer: ModelContainer = {
-        let schema = Schema(
-            [
-                Credential.self,
-            ]
-        )
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    
+    static private let schema = Schema(
+        [
+            Credential.self,
+        ]
+    )
+    var context : ModelContext!
+    let storeURL = URL.documentsDirectory.appending(path: "database.sqlite")
+
+    private var sharedContainer : ModelContainer!
     private init() {
-        self.context = .init(sharedContainer)
+        setupContext()
     }
+    
+    private func setupContext() {
+        let storeURL = URL.applicationSupportDirectory.appending(path: "default.store")
+        var container: ModelContainer!
+
+        // Check if the file exists at the specified location
+        
+        if FileManager.default.fileExists(atPath: storeURL.path) {
+            do {
+                let config = ModelConfiguration(url: storeURL)
+                container = try ModelContainer(for: DatabaseManager.schema, configurations: config)
+            } catch {
+                print("Failed to create model container with existing file: \(error)")
+                // Handle the error appropriately if needed
+            }
+        } else {
+            // File not found, handle it in the catch block
+            do {
+                let modelConfiguration = ModelConfiguration(schema: DatabaseManager.schema, isStoredInMemoryOnly: false)
+                container = try ModelContainer(for: DatabaseManager.schema, configurations: [modelConfiguration])
+            } catch {
+                print("Failed to create model container with new configuration: \(error)")
+                // Handle the error appropriately
+            }
+        }
+
+        self.sharedContainer = container
+        self.context = .init(container)
+    }
+
 
     func getModelContext() -> ModelContext {
         return context
