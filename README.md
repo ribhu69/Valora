@@ -1,5 +1,6 @@
-
 # Valora
+<img src="https://github.com/ribhu69/Valora/blob/main/Valora/ValoraPublic.png" alt="Valora Icon" width="150"/>
+
 
 ## Features
 - **Add Passcode**: Securely add a new passcode.
