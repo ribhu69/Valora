@@ -17,7 +17,7 @@ struct PassCodeDetailView: View {
     @State private var showPassword: Bool = false
     @State private var url: String = ""
     @State private var description: String = ""
-    
+    @State private var flipped = false
     @State var decryptedId : String = ""
     @State var decryptedPassword : String = ""
 
@@ -57,11 +57,21 @@ struct PassCodeDetailView: View {
                             .font(.title2)
                     }
                     Button(action: {
-                        showPassword.toggle()
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            showPassword.toggle()
+                            flipped.toggle() // Trigger the flip animation
+                        }
                     }) {
-                        Image(systemName: showPassword ? "eye.slash" : "eye")
+                        Image(showPassword ? "hide" : "show", bundle: nil)
+                            .resizable()
                             .renderingMode(.template)
                             .foregroundStyle(.primary)
+                           
+                            .frame(width: 24, height: 24)
+                            .rotation3DEffect(
+                                .degrees(flipped ? 0 : 180), // Reverse flip logic: from 180 to 0
+                                axis: (x: 1.0, y: 0.0, z: 0.0) // Flip vertically on the x-axis
+                            )
                     }
                 }
                 .padding(.bottom, 8)
@@ -73,13 +83,18 @@ struct PassCodeDetailView: View {
                 HStack {
                     TextField("URL", text: $url)
                         .font(.title2)
+                        .disabled(true)
 
-                    Image(systemName: "doc.on.doc.fill")
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .foregroundStyle(.secondary)
-
+                    Button(action: {
+                        UIPasteboard.general.string = url
+                    }, label: {
+                        Image("copyLink", bundle: nil)
+                            .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(.secondary)
+                    })
+                    .disabled(url.isEmpty)
                 }
                 .padding(.bottom, 8)
              
@@ -89,6 +104,7 @@ struct PassCodeDetailView: View {
                     .padding(.top, 8)
                 TextField("Description", text: $description)
                     .font(.title3)
+                    .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
             .padding()
         }

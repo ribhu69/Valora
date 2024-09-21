@@ -25,7 +25,6 @@ class DatabaseManager {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-    
     private init() {
         self.context = .init(sharedContainer)
     }
