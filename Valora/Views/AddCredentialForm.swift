@@ -1,42 +1,92 @@
 //
-//  AddCredentialForm.swift
+//  AddCredentialFormX.swift
 //  Valora
 //
-//  Created by Arkaprava Ghosh on 20/09/24.
+//  Created by Arkaprava Ghosh on 07/10/24.
 //
-
-import Foundation
 import SwiftUI
-
-import SwiftUI
-
-struct AddCredentialForm: View {
-    
+struct AddCredentialForm : View {
     @Environment(\.dismiss) var dismiss
     @State private var url: String = ""
     @State private var desc: String = ""
     @State private var userId: String = ""
     @State private var password: String = ""
     
+    @FocusState var urlFocused : Bool
+    @FocusState var descFocused : Bool
+    @FocusState var userIdFocused : Bool
+    @FocusState var passwordFocused : Bool
     var onSave : (Credential)->Void
-
     var body: some View {
         NavigationView {
-            VStack {
-                Form {
-                    Section(header: Text("Resource Information")) {
-                        TextField("URL", text: $url)
-                            .keyboardType(.URL) // Optional: set keyboard type for URL input
-                        TextField("Description", text: $desc)
+            VStack(alignment: .leading) {
+                ScrollView {
+                    HStack {
                         
+                        Text("Resource Information")
+                            .font(.title3)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 8)
+                            .padding(.leading, 8)
                     }
-                    Section(header: Text("Add Credentials")) {
-                        TextField("User ID", text: $userId)
-                        SecureField("Password", text: $password)
+                    
+                    TextField("URL", text: $url) {
+                        descFocused = true
                     }
+                    .focused($urlFocused)
+                        .keyboardType(.URL) // Optional: set keyboard type for URL input
+                        .padding()
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(urlFocused ? Color.green : Color.gray,
+                                        lineWidth: urlFocused ? 1.5 :1)
+                        }
+                        .padding(.bottom, 8)
+                    TextField("Description", text: $desc) {
+                        userIdFocused = true
+                    }
+                    .focused($descFocused)
+                        .padding()
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                            
+                                .stroke(descFocused ? Color.green : Color.gray, lineWidth: descFocused ? 1.5 : 1)
+                        }.padding(.bottom, 8)
+                    
+                    HStack {
+                        Text("Add Credentials")
+                            .font(.title3)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 8)
+                            .padding(.leading, 8)
+                    }
+                    TextField("User ID", text: $userId) {
+                        passwordFocused = true
+                    }
+                    .focused($userIdFocused)
+                        .padding()
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(userIdFocused ? Color.green : Color.gray, lineWidth: userIdFocused ? 1.5 : 1)
+                        }.padding(.bottom, 8)
+                    
+                    SecureField("Password", text: $password)
+                        .padding()
+                        .focused($passwordFocused)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(passwordFocused ? Color.green : Color.gray, lineWidth: passwordFocused ? 1.5 : 1)
+                        }
                 }
-                .navigationBarTitle("Add Credential", displayMode: .inline)
+                .padding(.horizontal, 8)
             }
+            .onAppear {
+                urlFocused = true
+            }
+            
+            .navigationBarTitle("Add Credential", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
@@ -58,7 +108,6 @@ struct AddCredentialForm: View {
             }
         }
     }
-    
     func saveCredentials() {
         
         do {
@@ -79,11 +128,3 @@ struct AddCredentialForm: View {
         }
     }
 }
-
-//struct AddCredentialForm_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddCredentialForm {_ in 
-//            
-//        }
-//    }
-//}

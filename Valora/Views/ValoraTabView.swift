@@ -12,7 +12,6 @@ struct ValoraTabView : View {
     @State private var animateList = false
     @State private var animateGear = false
     var body: some View {
-        
         NavigationStack {
             TabView {
                 PasscodeListView()
@@ -44,6 +43,4 @@ struct ValoraTabView : View {
             }
         }
     }
-    
-    
 }

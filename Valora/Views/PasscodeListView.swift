@@ -29,6 +29,7 @@ struct PassCodeCellView: View {
                 .padding(.trailing, 8)
             Spacer()
         }.padding(.vertical, 8)
+            
     }
     
     func getImage(for url: String?) -> String {
@@ -121,7 +122,6 @@ struct PasscodeListView: View {
                             NavigationLink(destination: PassCodeDetailView(passCode: item)) {
                                 PassCodeCellView(credential: item)
                                     
-
                                     .swipeActions {
                                         Button(role: .destructive) {
                                             itemToDelete = item
@@ -141,6 +141,8 @@ struct PasscodeListView: View {
                     
                 }
             }
+            
+            
             .alert("Delete Passcode", isPresented: $showDeletePrompt) {
                 Button("No", role: .cancel) {
                     itemToDelete = nil
@@ -163,6 +165,9 @@ struct PasscodeListView: View {
                 }
             }
             .sheet(isPresented: $showAddCredentialForm) {
+//                AddCredentialForm { cred in
+//                    addCredential(credential: cred)
+//                }
                 AddCredentialForm { cred in
                     addCredential(credential: cred)
                 }
@@ -201,7 +206,7 @@ struct PasscodeListView: View {
     private func fetchCredentials() {
         let fetchDesc = FetchDescriptor<Credential>()
         do {
-            let context = DatabaseManager.shared.getModelContext()
+            let context = `DatabaseManager`.shared.getModelContext()
             let updatedItems = try context.fetch(fetchDesc)
             passCodes = updatedItems
         }

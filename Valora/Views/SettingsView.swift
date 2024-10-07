@@ -35,9 +35,9 @@ struct SettingsView : View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVStack(alignment: .leading) {
-                    
+            
+            List {
+                VStack(alignment: .leading) {
                     Text("App Version")
                         .font(.title2)
                         .foregroundStyle(.secondary)
@@ -46,30 +46,30 @@ struct SettingsView : View {
                         .font(.title3)
                         .foregroundStyle(.primary)
                     
-                    VStack(alignment: .leading) {
-                        Text("Update Master Key")
-                            .font(.title2)
-                            .foregroundStyle(.primary)
-                            .padding(.bottom, 8)
-                        Text("Lets you change your app's master key.")
-                            .font(.title3)
-                            .foregroundStyle(.secondary)
-                            .padding(.bottom, 8)
-                    }
-                    .padding(.top, 8)
-                    .onTapGesture {
-                        updateMasterKey.toggle()
-                    }
-                    
-                    Link(destination: URL(string: "https://github.com/ribhu69/Valora")!) {
-                        Text("@Valora")
-                            .font(.title3)
-                    }
-                    .padding(.top, 16)
-                    
+                }
+                VStack(alignment: .leading) {
+                    Text("Update Master Key")
+                        .font(.title2)
+                        .foregroundStyle(.primary)
+                        .padding(.bottom, 8)
+                    Text("Lets you change your app's master key.")
+                        .font(.title3)
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom, 8)
+                }
+                .padding(.top, 8)
+                .onTapGesture {
+                    updateMasterKey.toggle()
+                }
+                
+                Link(destination: URL(string: "https://github.com/ribhu69/Valora")!) {
+                    Text("@Valora")
+                        .font(.title3)
+                        .padding(.vertical, 8)
                 }
             }
-            .padding()
+            .listStyle(.plain)
+            
             .navigationTitle("Settings")
         }
         .sheet(isPresented: $updateMasterKey, content: {
@@ -83,7 +83,7 @@ struct SettingsView : View {
     }
 }
 
-//#Preview {
-//    SettingsView()
-//}
-//
+#Preview {
+    SettingsView()
+}
+
