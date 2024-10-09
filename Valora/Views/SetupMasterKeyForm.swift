@@ -32,6 +32,7 @@ struct SetupMasterKeyForm: View {
     @State private var password: String = ""
     @State private var reenterPassword: String = ""
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) var context
     @State private var isSaveEnabled: Bool = false
     
     var isEditMode = false
@@ -197,8 +198,8 @@ struct SetupMasterKeyForm: View {
     private func updatePasscodeEncryption(newKey: String) {
         let fetchDesc = FetchDescriptor<Credential>()
         do {
-            let modelContext = DatabaseManager.shared.getModelContext()
-            let credentials = try modelContext.fetch(fetchDesc)
+            
+            let credentials = try context.fetch(fetchDesc)
             for credential in credentials {
                 let decryptedId = try AppSecurity.shared.decrypt(encryptedData: credential.userId)
                 let decryptedPassCode = try AppSecurity.shared.decrypt(encryptedData: credential.password)
@@ -206,7 +207,7 @@ struct SetupMasterKeyForm: View {
                 credential.userId = try AppSecurity.shared.encrypt(plainText: decryptedId, withKey: newKey)
                 credential.password = try AppSecurity.shared.encrypt(plainText: decryptedPassCode, withKey: newKey)
             }
-            try modelContext.save()
+            try context.save()
             NotificationCenter.default.post(name: NSNotification.Name(MASTER_KEY_UPDATED), object: nil)
 
         }
