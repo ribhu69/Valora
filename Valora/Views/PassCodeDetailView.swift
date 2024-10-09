@@ -16,17 +16,18 @@ struct PassCodeDetailView: View {
     private var password: Data
     @State private var showPassword: Bool = false
     @State private var url: String = ""
-    @State private var description: String = ""
+    @State private var description: String
     @State private var flipped = false
     @State var decryptedId : String = ""
     @State var decryptedPassword : String = ""
+    @Environment(\.colorScheme) var colorScheme
 
     
     init(passCode: Credential) {
         id = passCode.userId
         password = passCode.password
-        _url = State(wrappedValue: passCode.webURL ?? "")
-        _description = State(wrappedValue: passCode.desc)
+        _url = State(wrappedValue: passCode.webURL)
+        _description = State(wrappedValue: passCode.desc != nil ? passCode.desc! : "No Description")
         
         _decryptedId = try! State(wrappedValue: AppSecurity.shared.decrypt(encryptedData: passCode.userId))
         _decryptedPassword = try! State(wrappedValue: AppSecurity.shared.decrypt(encryptedData: passCode.password))
@@ -86,13 +87,14 @@ struct PassCodeDetailView: View {
                         .disabled(true)
 
                     Button(action: {
+                        generateHapticFeedback()
                         UIPasteboard.general.string = url
                     }, label: {
                         Image("copyLink", bundle: nil)
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 24, height: 24)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     })
                     .disabled(url.isEmpty)
                 }
@@ -110,6 +112,13 @@ struct PassCodeDetailView: View {
         }
         .navigationBarTitle("Passcode Details", displayMode: .inline)
     }
+    
+    func generateHapticFeedback() {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.prepare()
+            generator.impactOccurred()
+        }
+    
 }
 
 //struct PassCodeDetailView_Previews: PreviewProvider {
