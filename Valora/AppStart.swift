@@ -9,7 +9,6 @@ import Foundation
 
 class AppStart {
     static func initialize() -> ValoraTabView {
-        _ = DatabaseManager.shared
         return ValoraTabView()
     }
 }

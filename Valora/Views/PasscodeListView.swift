@@ -78,8 +78,8 @@ struct PassCodeCellView: View {
 struct PasscodeListView: View {
     
     
-    @State var passCodes: [Credential] = []
-
+    @Query var codes : [Credential]
+    @Environment(\.modelContext) var context
     @State private var setupMasterKeyForm = false
     @State private var showAddCredentialForm = false
     @State private var itemToDelete: Credential?
@@ -106,7 +106,7 @@ struct PasscodeListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if passCodes.isEmpty {
+                if codes.isEmpty {
                     Image(systemName: "figure.climbing")
                         .renderingMode(.template)
                         .resizable()
@@ -117,11 +117,11 @@ struct PasscodeListView: View {
                 }
                 else {
                     List {
-                        ForEach(passCodes) { item in
+                        ForEach(codes) { item in
                             
                             NavigationLink(destination: PassCodeDetailView(passCode: item)) {
                                 PassCodeCellView(credential: item)
-                                    
+                                    .buttonStyle(.plain)
                                     .swipeActions {
                                         Button(role: .destructive) {
                                             itemToDelete = item

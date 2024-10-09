@@ -41,6 +41,9 @@ struct ValoraTabView : View {
                         
                     }
             }
+            .modelContainer(for: [
+                Credential.self
+            ])
         }
     }
 }
