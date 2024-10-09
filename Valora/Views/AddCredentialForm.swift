@@ -100,7 +100,7 @@ struct AddCredentialForm : View {
                         saveCredentials()
                     }, label: {
                         Text("Save")
-                            .disabled(userId.isEmpty || password.isEmpty || (desc.isEmpty && url.isEmpty))
+                            .disabled(userId.isEmpty || password.isEmpty || url.isEmpty)
 
 
                     })
@@ -115,7 +115,7 @@ struct AddCredentialForm : View {
             let encryptedPassWord = try AppSecurity.shared.encrypt(plainText: password)
             let credential = Credential(
                 uuid: UUID(),
-                webURL: url.isEmpty ? nil : url,
+                webURL: url,
                 userId: encryptedUserId,
                 password: encryptedPassWord,
                 desc: desc
