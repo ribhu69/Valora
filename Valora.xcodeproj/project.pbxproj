@@ -28,7 +28,6 @@
 		A25393052C9DF59200DE9F7D /* SecurityConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25393042C9DF59200DE9F7D /* SecurityConstant.swift */; };
 		A25393072C9DF67800DE9F7D /* SetupMasterKeyForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25393062C9DF67800DE9F7D /* SetupMasterKeyForm.swift */; };
 		A25393092C9E002600DE9F7D /* AppSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25393082C9E002600DE9F7D /* AppSecurity.swift */; };
-		A253930B2C9E771800DE9F7D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253930A2C9E771800DE9F7D /* DatabaseManager.swift */; };
 		A253930D2C9E77B100DE9F7D /* AppStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253930C2C9E77B100DE9F7D /* AppStart.swift */; };
 		A2C45C772CB43F4B0049C4CD /* AddCredentialForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C45C762CB43F4B0049C4CD /* AddCredentialForm.swift */; };
 		A2C45C792CB4409E0049C4CD /* ValoraPublic.png in Resources */ = {isa = PBXBuildFile; fileRef = A2C45C782CB4409E0049C4CD /* ValoraPublic.png */; };
@@ -77,7 +76,6 @@
 		A25393042C9DF59200DE9F7D /* SecurityConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityConstant.swift; sourceTree = "<group>"; };
 		A25393062C9DF67800DE9F7D /* SetupMasterKeyForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupMasterKeyForm.swift; sourceTree = "<group>"; };
 		A25393082C9E002600DE9F7D /* AppSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSecurity.swift; sourceTree = "<group>"; };
-		A253930A2C9E771800DE9F7D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		A253930C2C9E77B100DE9F7D /* AppStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStart.swift; sourceTree = "<group>"; };
 		A2C45C762CB43F4B0049C4CD /* AddCredentialForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialForm.swift; sourceTree = "<group>"; };
 		A2C45C782CB4409E0049C4CD /* ValoraPublic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ValoraPublic.png; sourceTree = "<group>"; };
@@ -117,14 +115,6 @@
 			path = Security;
 			sourceTree = "<group>";
 		};
-		A23920FC2C9F4D4A00371329 /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				A253930A2C9E771800DE9F7D /* DatabaseManager.swift */,
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
 		A25392B12C9D8C9D00DE9F7D = {
 			isa = PBXGroup;
 			children = (
@@ -149,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				A2C45C782CB4409E0049C4CD /* ValoraPublic.png */,
-				A23920FC2C9F4D4A00371329 /* Database */,
 				A23920FB2C9F4D3A00371329 /* Security */,
 				A25392FE2C9DA6F200DE9F7D /* Info.plist */,
 				A25392F82C9DA68500DE9F7D /* Fonts */,
@@ -370,7 +359,6 @@
 				A25392C02C9D8C9D00DE9F7D /* ContentView.swift in Sources */,
 				A25393092C9E002600DE9F7D /* AppSecurity.swift in Sources */,
 				A253930D2C9E77B100DE9F7D /* AppStart.swift in Sources */,
-				A253930B2C9E771800DE9F7D /* DatabaseManager.swift in Sources */,
 				A25392EC2C9D8D2B00DE9F7D /* SettingsView.swift in Sources */,
 				A25393052C9DF59200DE9F7D /* SecurityConstant.swift in Sources */,
 				A25392F22C9D9D7B00DE9F7D /* PassCodeDetailView.swift in Sources */,
