@@ -13,24 +13,53 @@ import CryptoKit
 
 struct PassCodeCellView: View {
     var credential: Credential
-    
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
+        
         HStack {
             Image(getImage(for: credential.webURL))
-                .resizable()
-                .renderingMode(.template)
-                .foregroundStyle(.secondary)
-                .frame(width: 24, height: 24)
-                .padding(.leading, 8)
-        
-            Text(credential.webURL ?? credential.desc)
-                .font(.title3)
-                .padding(.leading, 8)
-                .padding(.trailing, 8)
-            Spacer()
-        }.padding(.vertical, 8)
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 18, height: 18)
+                    .padding(.leading, 8)
             
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(credential.webURL)
+                        .font(.custom("Manrope-Regular", size: 21))
+                    
+                }
+    
+                if let desc = credential.desc {
+                    Text(desc)
+                        .font(.custom("Manrope-Regular", size: 17))
+                        .lineLimit(2)
+                        .foregroundStyle(.secondary)
+                        
+                }
+            }
+            .padding(.horizontal, 8)
+            Spacer()
+            Button(action: {
+                generateHapticFeedback()
+                UIPasteboard.general.string = credential.webURL
+                
+            }, label: {
+                Image("copyLink")
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 21, height: 21)
+                    .foregroundStyle(colorScheme == .dark ? .white : .black)
+            })
+        }
     }
+    
+    func generateHapticFeedback() {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.prepare()
+            generator.impactOccurred()
+        }
     
     func getImage(for url: String?) -> String {
         guard let urlString = url, let domain = getDomain(from: urlString) else {
@@ -73,8 +102,6 @@ struct PassCodeCellView: View {
 
 }
 
-
-
 struct PasscodeListView: View {
     
     
@@ -97,6 +124,10 @@ struct PasscodeListView: View {
             .font: UIFont(name: "Manrope-Regular", size: 34)!
         ]
         appearance.backgroundColor = UIColor.systemBackground
+        
+           
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
@@ -174,14 +205,13 @@ struct PasscodeListView: View {
             }
             .onReceive(NotificationCenter.default
                 .publisher(for: NSNotification.Name(MASTER_KEY_UPDATED)), perform: { _ in
-                    fetchCredentials()
+//                    fetchCredentials()
             })
             .navigationTitle("Valora")
         }
         
         .onAppear {
             
-            fetchCredentials()
             if masterKey == nil {
                 let val = UserDefaults.standard.value(forKey: APP_MASTER_KEY_SET) as? Bool
                 if val != nil {
@@ -203,35 +233,12 @@ struct PasscodeListView: View {
         })
     }
     
-    private func fetchCredentials() {
-        let fetchDesc = FetchDescriptor<Credential>()
-        do {
-            let context = `DatabaseManager`.shared.getModelContext()
-            let updatedItems = try context.fetch(fetchDesc)
-            passCodes = updatedItems
-        }
-        catch {
-            fatalError()
-        }
-    }
-    
     private func addCredential(credential : Credential) {
-        withAnimation {
-            let context = DatabaseManager.shared.getModelContext()
-            context.insert(credential)
-            passCodes.append(credential)
-        }
+        context.insert(credential)
     }
     
     func invokeDeleteAction(for item: Credential) {
-        let context = DatabaseManager.shared.getModelContext()
         context.delete(item)
-        passCodes.removeAll { $0.uuid.uuidString == item.uuid.uuidString}
     }
-    
-}
 
-//#Preview {
-//    PasscodeListView().modelContainer(for: Credential.self, inMemory: true)
-//}
-//
+}
